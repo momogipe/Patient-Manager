@@ -3,6 +3,7 @@ package com.manager.patient.controllers;
 import com.manager.patient.dto.PatientDto;
 import com.manager.patient.services.IPatientservices;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,8 @@ public class PatientController {
     private IPatientservices patientservices;
 
     @GetMapping("/users")
-    public String showList(Model model) {
-        List<PatientDto> listusers = patientservices.userList();
+    public String showList(Model model , @Param("keyword") String keyword) {
+        List<PatientDto> listusers = patientservices.patientList();
         model.addAttribute("listusers", listusers);
         return "users";
     }

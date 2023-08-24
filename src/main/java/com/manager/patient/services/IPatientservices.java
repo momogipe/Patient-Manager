@@ -7,8 +7,9 @@ import java.util.List;
 
 @Service
 public interface IPatientservices {
-    public List<PatientDto> userList();
+    public List<PatientDto> patientList();
     public PatientDto save(PatientDto patientDto);
     public PatientDto get( Integer id);
     public void delete(Integer id);
+    public PatientDto update(PatientDto patientDto);
 }
