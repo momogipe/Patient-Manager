@@ -48,10 +48,16 @@
         <!-- Text input -->
         <div class="form-outline mb-4">
             <input type="date" th:field="*{dateNaissance}" class="form-control " required minlength="2" maxlength="45" />
-            <label class="form-label" >DATE NAISSANCE</label>
+            <label class="form-label" >BIRTHDATE</label>
         </div>
-
-
+        <div class="form-outline mb-4">
+            <input type="text" th:field="*{allergies}" class="form-control " required minlength="2" maxlength="45" />
+            <label class="form-label" >ALLERGIES</label>
+        </div>
+        <div class="form-outline mb-4">
+            <input type="text" th:field="*{antecedent}" class="form-control " required minlength="2" maxlength="45" />
+            <label class="form-label" >ANTECEDENT</label>
+        </div>
         <!-- Checkbox -->
         <div class="form-check d-flex justify-content-center mb-4">
             <input class="form-check-input me-2" type="checkbox" value="" th:field="*{enable}" checked />

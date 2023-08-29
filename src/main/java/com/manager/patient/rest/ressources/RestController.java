@@ -29,8 +29,9 @@ public class RestController {
     }
 
     @GetMapping("/persons")
-    public List<PatientDto> findPersons() {
-        return patientservices.patientList();
+    public List<PatientDto> findPersons(@RequestParam(value = "Num_Page",defaultValue ="1",required = false) int page,
+                                        @RequestParam(value = "nombre_page",defaultValue = "5",required = false) int nombrepage) {
+        return patientservices.findListpatient(page,nombrepage);
     }
 
     @PostMapping("/persons")

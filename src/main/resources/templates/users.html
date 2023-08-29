@@ -15,7 +15,7 @@
             <div class="card-header">
                 <h3>Manage Patients</h3>
                 <form class="d-flex justify-content-end" th:action="@{/users}">
-                    <input class="form-control w-50" type="search" name="keyword" placeholder="Search" aria-label="Search">
+                    <input class="form-control w-50" type="search" name="keyword" placeholder="Search" aria-label="Search" th:value="${keyword}">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <div th:if="${message}" class="alert alert-success text-center">[[${message}]]</div>
@@ -27,34 +27,41 @@
                         <th>FIRSTNAME</th>
                         <th>LASTNAME</th>
                         <th>BIRTHDAY</th>
-                        <th>ENABLED</th>
+                        <th>ALLERGY</th>
+                        <th>ANTECEDENT</th>
+                        <th>CONSULTED</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="user:${listusers}">
+                    <th:block th:each="user:${listpatient}">
                         <tr>
                             <td>[[${user.firstname}]]</td>
                             <td>[[${user.lastname}]]</td>
                             <td>[[${user.dateNaissance}]]</td>
+                            <td>[[${user.allergies}]]</td>
+                            <td>[[${user.antecedent}]]</td>
                             <td> [[${user.enable}]]</td>
                             <td>
-                                <a class="h4 mr-3 link-info" th:href="@{'/users/edit/' +${user.id}}">Edit</a>
-                                <a class="h4 mr-3 link-danger" th:href="@{'/users/delete/' +${user.id}}">Delete</a>
+                                <a class="btn btn-success" th:href="@{'/users/edit/' +${user.id}}">Edit</a>
+                                <a onclick="javascript:return confirm('voulez-vous vraiment supprimer  ?')" class="btn btn-danger" th:href="@{'/users/delete/' +${user.id},keyword=${keyword}}">Delete</a>
                             </td>
                         </tr>
                     </th:block>
                     </tbody>
                 </table>
-            </div>
-
-
-            <div>
-
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item" th:each="page,status:${totalPages}">
+                            <a  th:Href= "@{/users(page=${status.index},keyword=${keyword})}"
+                                th:text="${status.index}"
+                                th:class="${currentPage==status.index? 'btn btn-info':'btn btn-outline-info'}"
+                            ></a>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

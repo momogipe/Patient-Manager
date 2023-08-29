@@ -3,12 +3,14 @@ package com.manager.patient.controllers;
 import com.manager.patient.dto.PatientDto;
 import com.manager.patient.services.IPatientservices;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -19,9 +21,18 @@ public class PatientController {
     private IPatientservices patientservices;
 
     @GetMapping("/users")
-    public String showList(Model model , @Param("keyword") String keyword) {
-        List<PatientDto> listusers = patientservices.patientList();
-        model.addAttribute("listusers", listusers);
+    public String showList(Model model ,
+                           @RequestParam(name = "page",defaultValue = "1")int numPage,
+                           @RequestParam(name = "size",defaultValue = "3")int nomPage,
+                           @RequestParam(name = "keyword",defaultValue = "")String keyword) {
+      Page<PatientDto> listpatient = patientservices.findPaginated(numPage,nomPage,keyword);
+        model.addAttribute("listpatient", listpatient);
+        model.addAttribute("currentPage",numPage );
+        model.addAttribute("totalPages", new  int[listpatient.getTotalPages()] );
+        model.addAttribute("keyword",keyword);
+
+
+
         return "users";
     }
 

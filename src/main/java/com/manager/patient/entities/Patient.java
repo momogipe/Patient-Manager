@@ -18,15 +18,19 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false,unique = true,length = 45)
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
-    @Column(length = 15,nullable = false)
+    @Column(length = 15, nullable = false)
     private String password;
-    @Column(length = 45,nullable = false,name = "firsname")
+    @Column(length = 45, nullable = false, name = "firsname")
     private String firstname;
-    @Column(length = 45,nullable = false,name = "Lastname")
+    @Column(length = 45, nullable = false, name = "Lastname")
     private String lastname;
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
+    @Column(length = 45, nullable = false, name = "allergies")
+    private String allergies;
+    @Column(length = 45, nullable = false, name = "antecedent")
+    private String antecedent;
     private Boolean enable;
 }
